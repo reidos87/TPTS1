@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operasional Bangunan Pengolahan II TPST1 KIPP IKN</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        :root {
+            --ikn-background: #002856; /* A deep blue from the logo */
+            --ikn-text-primary: #FFFFFF; /* White */
+            --ikn-accent: #E5BE0E; /* A prominent goldish-yellow from the logo */
+        }
+
+        body {
+            background-color: var(--ikn-background);
+            color: var(--ikn-text-primary);
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 90%;
+        }
+
+        .logo {
+            max-width: 200px; /* Adjusted logo size for better visibility */
+            height: auto;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.8); /* Added a light background for visibility with the new color theme */
+            border-radius: 10px;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--ikn-accent);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--ikn-text-primary);
+            color: var(--ikn-background);
+            border-radius: 10px;
+            padding: 1.5rem;
+            min-width: 120px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-item h2 {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .countdown-item p {
+            font-size: 1rem;
+            text-transform: uppercase;
+            margin: 0.5rem 0 0;
+            letter-spacing: 2px;
+        }
+
+        .message {
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--ikn-accent);
+            animation: fadeIn 2s forwards;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            #countdown {
+                gap: 1rem;
+            }
+            .countdown-item {
+                padding: 1rem;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="WhatsApp Image 2025-07-29 at 11.39.09_3ace526c.jpg" alt="IKN Nusantara Logo" class="logo">
+        
+        <h1 id="event-title">
+            Menuju Operasional Bangunan Pengolahan II TPST1 KIPP IKN
+        </h1>
+
+        <div id="countdown">
+            <div class="countdown-item">
+                <h2 id="days">00</h2>
+                <p>Hari</p>
+            </div>
+            <div class="countdown-item">
+                <h2 id="hours">00</h2>
+                <p>Jam</p>
+            </div>
+            <div class="countdown-item">
+                <h2 id="minutes">00</h2>
+                <p>Menit</p>
+            </div>
+            <div class="countdown-item">
+                <h2 id="seconds">00</h2>
+                <p>Detik</p>
+            </div>
+        </div>
+
+        <h1 id="countdown-message" class="message">
+            Operasional Bangunan Pengolahan II telah dimulai!
+        </h1>
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        const countDownDate = new Date("Sep 1, 2025 00:00:00 GMT+0800").getTime();
+
+        // Update the countdown every 1 second
+        const x = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            const distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Function to add a leading zero if the number is less than 10
+            function formatNumber(num) {
+                return num < 10 ? "0" + num : num;
+            }
+
+            // Display the result in the corresponding elements
+            document.getElementById("days").innerHTML = formatNumber(days);
+            document.getElementById("hours").innerHTML = formatNumber(hours);
+            document.getElementById("minutes").innerHTML = formatNumber(minutes);
+            document.getElementById("seconds").innerHTML = formatNumber(seconds);
+
+            // If the countdown is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("event-title").style.display = "none";
+                document.getElementById("countdown-message").style.display = "block";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
