@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operasional Bangunan Pengolahan II TPST1 KIPP IKN</title>
+    <title>IKN Project Timers</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
@@ -20,22 +20,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             text-align: center;
             flex-direction: column;
             padding: 2rem;
+            box-sizing: border-box; /* Ensures padding is included in height calculation */
         }
 
         .container {
             max-width: 90%;
+            margin-bottom: 3rem;
         }
 
         .logo {
-            max-width: 200px; /* Adjusted logo size for better visibility */
+            max-width: 200px;
             height: auto;
             margin-bottom: 2rem;
-            background: rgba(255, 255, 255, 0.8); /* Added a light background for visibility with the new color theme */
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             padding: 1rem;
         }
@@ -48,7 +50,27 @@
             line-height: 1.2;
         }
 
-        #countdown {
+        h2 {
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--ikn-accent);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .countdown-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4rem; /* Spacing between the two timers */
+        }
+
+        .countdown-box {
+            width: 100%;
+        }
+
+        .countdown {
             display: flex;
             justify-content: center;
             gap: 2rem;
@@ -68,7 +90,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .countdown-item h2 {
+        .countdown-item h3 {
             font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 700;
             margin: 0;
@@ -95,7 +117,7 @@
         }
 
         @media (max-width: 600px) {
-            #countdown {
+            .countdown {
                 gap: 1rem;
             }
             .countdown-item {
@@ -108,71 +130,114 @@
 <body>
     <div class="container">
         <img src="WhatsApp Image 2025-07-29 at 11.39.09_3ace526c.jpg" alt="IKN Nusantara Logo" class="logo">
-        
-        <h1 id="event-title">
-            Menuju Operasional Bangunan Pengolahan II TPST1 KIPP IKN
-        </h1>
+    </div>
 
-        <div id="countdown">
-            <div class="countdown-item">
-                <h2 id="days">00</h2>
-                <p>Hari</p>
+    <div class="countdown-wrapper">
+        <div class="countdown-box">
+            <h2 id="event-title-1">
+                Menuju Operasional Bangunan Pengolahan II TPST1 KIPP IKN
+            </h2>
+            <div id="countdown-1" class="countdown">
+                <div class="countdown-item">
+                    <h3 id="days">00</h3>
+                    <p>Hari</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="hours">00</h3>
+                    <p>Jam</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="minutes">00</h3>
+                    <p>Menit</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="seconds">00</h3>
+                    <p>Detik</p>
+                </div>
             </div>
-            <div class="countdown-item">
-                <h2 id="hours">00</h2>
-                <p>Jam</p>
-            </div>
-            <div class="countdown-item">
-                <h2 id="minutes">00</h2>
-                <p>Menit</p>
-            </div>
-            <div class="countdown-item">
-                <h2 id="seconds">00</h2>
-                <p>Detik</p>
-            </div>
+            <h1 id="countdown-message-1" class="message">
+                Operasional Bangunan Pengolahan II telah dimulai!
+            </h1>
         </div>
-
-        <h1 id="countdown-message" class="message">
-            Operasional Bangunan Pengolahan II telah dimulai!
-        </h1>
+        
+        <div class="countdown-box">
+            <h2 id="event-title-2">
+                Menuju Akhir Layanan oleh Binakarya
+            </h2>
+            <div id="countdown-2" class="countdown">
+                <div class="countdown-item">
+                    <h3 id="days2">00</h3>
+                    <p>Hari</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="hours2">00</h3>
+                    <p>Jam</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="minutes2">00</h3>
+                    <p>Menit</p>
+                </div>
+                <div class="countdown-item">
+                    <h3 id="seconds2">00</h3>
+                    <p>Detik</p>
+                </div>
+            </div>
+            <h1 id="countdown-message-2" class="message">
+                Layanan oleh Binakarya telah berakhir!
+            </h1>
+        </div>
     </div>
 
     <script>
-        // Set the date we're counting down to: August 31, 2025 at 00:00:00 WITA (GMT+0800)
-        const countDownDate = new Date("Aug 31, 2025 00:00:00 GMT+0800").getTime();
+        function formatNumber(num) {
+            return num < 10 ? "0" + num : num;
+        }
 
-        // Update the countdown every 1 second
+        // --- Timer 1 Logic ---
+        const countDownDate1 = new Date("Aug 31, 2025 00:00:00 GMT+0800").getTime();
         const x = setInterval(function() {
-
-            // Get today's date and time
             const now = new Date().getTime();
+            const distance = countDownDate1 - now;
 
-            // Find the distance between now and the count down date
-            const distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Function to add a leading zero if the number is less than 10
-            function formatNumber(num) {
-                return num < 10 ? "0" + num : num;
-            }
-
-            // Display the result in the corresponding elements
             document.getElementById("days").innerHTML = formatNumber(days);
             document.getElementById("hours").innerHTML = formatNumber(hours);
             document.getElementById("minutes").innerHTML = formatNumber(minutes);
             document.getElementById("seconds").innerHTML = formatNumber(seconds);
 
-            // If the countdown is finished, write some text
             if (distance < 0) {
                 clearInterval(x);
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("event-title").style.display = "none";
-                document.getElementById("countdown-message").style.display = "block";
+                document.getElementById("countdown-1").style.display = "none";
+                document.getElementById("event-title-1").style.display = "none";
+                document.getElementById("countdown-message-1").style.display = "block";
+            }
+        }, 1000);
+
+        // --- Timer 2 Logic ---
+        const countDownDate2 = new Date("Dec 31, 2025 00:00:00 GMT+0800").getTime();
+        const y = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate2 - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days2").innerHTML = formatNumber(days);
+            document.getElementById("hours2").innerHTML = formatNumber(hours);
+            document.getElementById("minutes2").innerHTML = formatNumber(minutes);
+            document.getElementById("seconds2").innerHTML = formatNumber(seconds);
+
+            if (distance < 0) {
+                clearInterval(y);
+                document.getElementById("countdown-2").style.display = "none";
+                document.getElementById("event-title-2").style.display = "none";
+                document.getElementById("countdown-message-2").style.display = "block";
             }
         }, 1000);
     </script>
